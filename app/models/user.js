@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const pick = require('lodash/pick')
 
 const Schema = mongoose.Schema
 
@@ -104,7 +105,11 @@ userSchema.methods.generateToken = function() {
     const token = jwt.sign(tokenData, 'jwt@123')
     user.tokens.push({token})
     return user.save()
-            .then(user => Promise.resolve(token))
+            .then(user => {
+                const body = pick(user, ['username', 'mobile', 'email', 'role', 'profile'])
+                body.token = token
+                return Promise.resolve(body)
+            })
             .catch(err => Promise.reject(err))
 }
 

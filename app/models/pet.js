@@ -25,6 +25,10 @@ const petSchema = new Schema({
     microchipped: {
         type: Boolean,
         default: false
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref : 'User'
     }
 })
 

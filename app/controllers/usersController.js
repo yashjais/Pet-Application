@@ -1,6 +1,12 @@
 const User = require('../models/user')
 const pick = require('lodash/pick')
 
+module.exports.users = (req, res) => {
+        User.find()
+            .then(users => res.send(users))
+            .catch(err => res.send(err))
+}
+
 module.exports.register = (req, res) => {
     const body = pick(req.body, ['username', 'email', 'mobile','password', 'role'])
     const user = new User(body)
@@ -15,8 +21,9 @@ module.exports.login = (req, res) => {
         .then(user => {
             return user.generateToken()
         })
-        .then(token => {
-            res.setHeader('x-auth', token).send({})
+        .then(user => {
+            console.log(user, 'in the login')
+            res.setHeader('x-auth', user.token).send(user)
         })
         .catch(err => res.send(err))
 }
