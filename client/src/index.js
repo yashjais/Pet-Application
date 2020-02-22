@@ -4,19 +4,19 @@ import App from './App'
 
 import configureStore from './store/configureStore'
 import {Provider} from 'react-redux'
-import {setUser} from './actions/user'
+import {startGetUser} from './actions/user'
 
 const store = configureStore()
 
-console.log(store.getState())
 
 store.subscribe(() => {
     console.log('in the index', store.getState())
 })
 
-console.log(store, 'store')
-
-store.dispatch(setUser())
+if(localStorage.getItem('authToken')){
+    const token = localStorage.getItem('authToken')
+    store.dispatch(startGetUser(token))
+}
 
 const ele = (
     <Provider store={store}>

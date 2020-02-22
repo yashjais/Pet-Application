@@ -1,4 +1,6 @@
-import {combineReducers, createStore} from 'redux'
+import {combineReducers, createStore, applyMiddleware} from 'redux'
+
+import thunk from 'redux-thunk'
 
 import userReducer from '../reducers/userReducer'
 import petsReducer from '../reducers/petsReducer'
@@ -11,7 +13,7 @@ const configureStore = () => {
         pets: petsReducer,
         review: reviewReducer,
         profile: profileReducer
-    }))
+    }), applyMiddleware(thunk))
     return store
 }
 
