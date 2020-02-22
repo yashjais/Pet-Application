@@ -11,7 +11,7 @@ module.exports.register = (req, res) => {
     const body = pick(req.body, ['username', 'email', 'mobile','password', 'role'])
     const user = new User(body)
     user.save()
-        .then(user => res.send(user))
+        .then(user => res.send(pick(user, ['_id', 'username', 'email', 'mobile', 'role'])))
         .catch(err => res.send(err))
 }
 

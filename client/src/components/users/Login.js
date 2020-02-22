@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {startSetUser} from '../../actions/user'
+import {startGetUser} from '../../actions/user'
 
 class Login extends React.Component {
     constructor() {
@@ -24,7 +24,7 @@ class Login extends React.Component {
         }
         console.log(formData)
         const redirect = () => this.props.history.push('/')
-        this.props.dispatch(startSetUser(formData, redirect))
+        this.props.dispatch(startGetUser(formData, redirect))
     }
     render() {
         return (
