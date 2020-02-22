@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 
 import configureStore from './store/configureStore'
+import {Provider} from 'react-redux'
 import {setUser} from './actions/user'
 
 const store = configureStore()
@@ -17,4 +18,10 @@ console.log(store, 'store')
 
 store.dispatch(setUser())
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const ele = (
+    <Provider store={store}>
+        <App />
+    </Provider>
+)
+
+ReactDOM.render(ele, document.getElementById('root'))
