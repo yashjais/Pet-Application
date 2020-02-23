@@ -15,7 +15,7 @@ store.subscribe(() => {
 
 if(localStorage.getItem('authToken')){
     const token = localStorage.getItem('authToken')
-    // store.dispatch(startGetUserIndex(token))
+    store.dispatch(startGetUserIndex(token))
 }
 
 const ele = (

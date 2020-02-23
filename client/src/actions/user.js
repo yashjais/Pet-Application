@@ -9,13 +9,19 @@ export const startGetUser = (user, redirect) => {
                     alert('invalid email/password')
                 } else {
                     const token = response.headers["x-auth"]
-                    console.log('token', token)
-                    console.log('header', response.headers)
-                    console.log('response', response)
                     localStorage.setItem('authToken', token)
-                    dispatch(setUser(user))
-                    redirect()
+                    return axios.get('/users/account', {
+                        headers: {
+                            'x-auth': token
+                        }
+                    })
                 }
+            })
+            .then(response => {
+                const user = response.data
+                dispatch(setUser(user))
+                console.log(redirect)
+                redirect()
             })
             .catch(err => alert(err))
     }
@@ -31,6 +37,7 @@ export const startSetUser = (user, redirect) => {
                 } else if(response.data.hasOwnProperty('errmsg')) {
                     alert(response.data.errmsg)
                 } else {
+                    console.log(redirect)
                     redirect()
                 }
             })
@@ -40,12 +47,49 @@ export const startSetUser = (user, redirect) => {
 
 // coming from index, if the token is in local storage already -- also check for if the token is there in local storage but not in the backend -- so what should we do 
 export const startGetUserIndex = (token) => {
+    return (dispatch) => {
+        axios.get('/users/account', {
+            headers: {
+                'x-auth': token
+            }
+        })
+            .then(response => {
+                const user = response.data
+                dispatch(setUser(user))
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+}
 
+// logging out the user
+export const startRemoveUser = (token, redirect) => {
+    return (dispatch) => {
+        axios.delete('/users/logout', {
+            headers: {
+                'x-auth':token
+            }
+        })
+            .then(response => {
+                console.log(response.data)
+                localStorage.removeItem('authToken')
+                dispatch(removeUser())
+                redirect()
+            })
+            .catch(err => alert(err))
+    }
 }
 
 // coming from the login functionality
 export const setUser = (user) => {
     return {
         type: 'SET_USER', payload: user
+    }
+}
+
+export const removeUser = () => {
+    return {
+        type: 'REMOVE_USER'
     }
 }

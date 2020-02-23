@@ -19,6 +19,9 @@ class Register extends React.Component {
             [e.target.name]: e.target.value
         })
     }
+    handleRoleChange = (role) => {
+        this.setState({ role })
+    }
     handleSubmit = (e) => {
         e.preventDefault()
         const formData = {
@@ -28,8 +31,7 @@ class Register extends React.Component {
             password: this.state.password,
             role: this.state.role
         }
-        console.log(formData)
-        const redirect = () => this.props.history.push('/login')
+        const redirect = () => this.props.history.push('/users/login')
         this.props.dispatch(startSetUser(formData, redirect))
     }
     render() {
@@ -49,9 +51,9 @@ class Register extends React.Component {
 
                     <label htmlFor="role">Role</label> <br />
                     <label>Pet-Sitter</label> 
-                    <input type="radio" id="role" name="role" onChange={this.handleChange} value='petsitter' /> 
+                    <input type="radio" id="role" name="role" onChange={() => this.handleRoleChange('petsitter')} value={this.state.role} /> 
                     <label>Pet-Owner</label>
-                    <input type="radio" id="role" name="role" onChange={this.handleChange} value='petowner' /> <br />
+                    <input type="radio" id="role" name="role" onChange={() => this.handleRoleChange('petowner')} value={this.state.role} /> <br />
 
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" onChange={this.handleChange} value={this.state.password} placeholder='password' /> <br />
