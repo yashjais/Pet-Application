@@ -15,19 +15,20 @@ const profileSchema = new Schema({
     avatar: {
         type: String
     },
-    services: {
-        type: [String],
-    },
+    services: [{
+        type: Schema.Types.ObjectId
+    }],
     // images: {
     //     type: [String]
     // },
     location: {
-        type: String
+        type: String,
+        enum: ['Pune', 'Bangalore', 'Chennai']
     },
-    reviews: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Review'
-    }],
+    // reviews: [{ // not required here
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Review'
+    // }],
     // availability: { // is he available for a given time in future
     //     type: 
     // }
