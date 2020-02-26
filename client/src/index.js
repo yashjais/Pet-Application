@@ -5,6 +5,7 @@ import App from './App'
 import configureStore from './store/configureStore'
 import {Provider} from 'react-redux'
 import {startGetUserIndex} from './actions/user'
+import {startGetProfile} from './actions/profile'
 
 const store = configureStore()
 
@@ -16,6 +17,8 @@ store.subscribe(() => {
 if(localStorage.getItem('authToken')){
     const token = localStorage.getItem('authToken')
     store.dispatch(startGetUserIndex(token))
+    store.dispatch(startGetProfile(token))
+    // startGetProfile(token)
 }
 
 const ele = (

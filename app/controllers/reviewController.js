@@ -3,7 +3,13 @@ const Review = require('../models/review')
 
 module.exports.list = (req, res) => {
     Review.findOne({ reviewer: req.user._id})
-        .then(review => res.send(review))
+        .then(review => {
+            if(review) {
+                res.send(review)
+            } else {
+                res.send({})
+            }
+        })
         .catch(err => res.send(err))    
 }
 

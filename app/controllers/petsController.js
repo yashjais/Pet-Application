@@ -1,6 +1,12 @@
 const Pet = require('../models/pet')
 const pick = require('lodash/pick')
 
+module.exports.listAll = (req, res) => {
+    Pet.find() 
+        .then(pets => res.send(pets))
+        .catch(err => res.send(err))
+}
+
 module.exports.list = (req, res) => {
     Pet.find({ user: req.user._id}) 
         .then(pets => res.send(pets))

@@ -1,4 +1,5 @@
 import axios from '../config/axios'
+import {startGetProfile} from './profile'
 
 // coming from login request
 export const startGetUser = (user, redirect) => {
@@ -10,18 +11,20 @@ export const startGetUser = (user, redirect) => {
                 } else {
                     const token = response.headers["x-auth"]
                     localStorage.setItem('authToken', token)
-                    return axios.get('/users/account', {
+                    axios.get('/users/account', {
                         headers: {
                             'x-auth': token
                         }
                     })
+                        .then(response => {
+                            const user = response.data
+                            dispatch(setUser(user))
+                            dispatch(startGetProfile(token))
+                            // console.log(redirect)
+                            redirect()
+                        })
+                        .catch(err => alert(err))
                 }
-            })
-            .then(response => {
-                const user = response.data
-                dispatch(setUser(user))
-                console.log(redirect)
-                redirect()
             })
             .catch(err => alert(err))
     }

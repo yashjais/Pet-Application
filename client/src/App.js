@@ -10,6 +10,8 @@ import Register from './components/users/Register'
 import Login from './components/users/Login'
 import Account from './components/users/Account'
 
+import AddProfile from './components/profile/Add'
+
 
 function App(props) {
     console.log(props, 'in the app')
@@ -49,6 +51,8 @@ function App(props) {
             <Route path='/users/register' component={Register} />
             <Route path='/users/login' component={Login} />
             <Route path='/users/account' component={Account} />
+
+            <Route path='/profile-add' component={AddProfile} />
             </BrowserRouter>
         </div>
     )

@@ -8,8 +8,14 @@ module.exports.listAll = (req, res) => {
 }
 
 module.exports.list = (req, res) => {
-    Profile.findOne({_id: req.user._id})
-        .then(profile => res.send(profile))
+    Profile.findOne({user: req.user._id})
+        .then(profile => {
+            if(profile) {
+                res.send(profile)
+            } else {
+                res.send({})
+            }
+        })
         .catch(err => res.send(err))
 }
 
@@ -41,7 +47,7 @@ module.exports.create = (req, res) => {
 module.exports.update = (req, res) => {
     const { role } = req.user
     if(role == 'petowner') {
-        const body = pick(req.body, ['bio', 'avatar', 'location', 'reviews'])
+        const body = pick(req.body, ['bio', 'avatar', 'location'])
         const id = req.params.id
         Profile.findOneAndUpdate({_id: id, user: req.user._id}, body, {runValidators: true, new: true})
             .then(profile => {
@@ -54,7 +60,7 @@ module.exports.update = (req, res) => {
             .catch(err => res.send(err))
 
     } else if(role == 'petsitter') {
-        const body = pick(req.body, ['bio', 'avatar', 'location', 'reviews', 'services'])
+        const body = pick(req.body, ['bio', 'avatar', 'location', 'services'])
         const id = req.params.id
         Profile.findOneAndUpdate({_id: id, user: req.user._id}, body, {runValidators: true, new: true})
             .then(profile => {
