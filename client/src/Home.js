@@ -23,7 +23,10 @@ function Home(props) {
                     <div>
                         <h4> Your Profile isn't updated</h4>
                         <h4> Please fill the profile <Link to='/profile-add'>here</Link></h4>
-                    </div> : "Your Profile is updated"
+                    </div> : 
+                    <div>
+                        <p> Your Profile is updated. Check You Profile <Link to='/profile'>here</Link> </p>
+                    </div>
                 }
             </div>
             }

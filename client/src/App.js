@@ -11,7 +11,12 @@ import Login from './components/users/Login'
 import Account from './components/users/Account'
 
 import AddProfile from './components/profile/Add'
+import ListProfile from './components/profile/List'
+import ListEdit from './components/profile/Edit'
 
+import Listing from './components/Listing/List'
+
+import Pets from './components/Pets/List'
 
 function App(props) {
     console.log(props, 'in the app')
@@ -40,7 +45,10 @@ function App(props) {
             ) : (
                 <div> 
                     {/* some link authenticated of pets */}
+                    <Link to='/profile'>Profile</Link>
                     <Link to='/users/account'>Account</Link>
+                    <Link to='/users/listing'>Listing</Link>
+                    {props.user.role == 'petowner' && <Link to="/pets">Pets</Link>}
                     <Link to='#' onClick={handleLogout}>Logout</Link>
                 </div> 
             )}
@@ -53,6 +61,12 @@ function App(props) {
             <Route path='/users/account' component={Account} />
 
             <Route path='/profile-add' component={AddProfile} />
+            <Route path="/profile" component={ListProfile} exact={true} />
+            <Route path="/profile/edit/:id" component={ListEdit} />
+
+            <Route path='/listing' component={Listing} />
+
+            <Route path="/pets" component={Pets} />
             </BrowserRouter>
         </div>
     )

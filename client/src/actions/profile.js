@@ -24,16 +24,38 @@ export const startGetProfile = (token) => {
 
 // coming from the component
 export const startSetProfile = (profile, redirect, token) => {
-    axios.post('/profile', profile,{
-        headers: {
-            'x-auth': token
-        }
-    })
-        .then(response => {
-            const profile = response.data
-            console.log(profile)
+    return (dispatch) => {
+        axios.post('/profile', profile,{
+            headers: {
+                'x-auth': token
+            }
         })
-        .catch(err => {
-            alert(err)
+            .then(response => {
+                const profile = response.data
+                console.log(profile)
+                dispatch(setProfile(profile))
+                redirect()
+            })
+            .catch(err => {
+                alert(err)
+            })
+    }
+}
+
+export const startUpdateProfile = (profile, id, redirect, token) => {
+    return (dispatch) => {
+        axios.put(`/profile/${id}`, profile, {
+            headers: {
+                'x-auth': token
+            }
         })
+            .then(response => {
+                const profile = response.data
+                console.log(profile)
+                dispatch(setProfile(profile))
+                console.log('in action')
+                redirect()
+            })
+            .catch(err => alert(err))
+    }
 }
