@@ -2,7 +2,7 @@ const Profile = require('../models/profile')
 const pick = require('lodash/pick')
 
 module.exports.listAll = (req, res) => {
-    Profile.find()
+    Profile.find().populate('user',['username', 'email', 'mobile', 'role'])
         .then(profile => res.send(profile))
         .catch(err => res.send(err))
 }

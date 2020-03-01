@@ -1,5 +1,6 @@
 import axios from '../config/axios'
 import {startGetProfile} from './profile'
+import {startGetAllProfile} from './profile'
 
 // coming from login request
 export const startGetUser = (user, redirect) => {
@@ -20,6 +21,7 @@ export const startGetUser = (user, redirect) => {
                             const user = response.data
                             dispatch(setUser(user))
                             dispatch(startGetProfile(token))
+                            dispatch(startGetAllProfile(token))
                             // console.log(redirect)
                             redirect()
                         })

@@ -6,6 +6,7 @@ import userReducer from '../reducers/userReducer'
 import petsReducer from '../reducers/petsReducer'
 import reviewReducer from '../reducers/reviewReducer'
 import profileReducer from '../reducers/profileReducer'
+import profilesReducer from '../reducers/profilesReducer'
 import serviceReducer from '../reducers/serviceReducer'
 
 const configureStore = () => {
@@ -14,7 +15,8 @@ const configureStore = () => {
         pets: petsReducer,
         review: reviewReducer,
         services: serviceReducer,
-        profile: profileReducer
+        profile: profileReducer,
+        profiles: profilesReducer
     }), applyMiddleware(thunk))
     return store
 }

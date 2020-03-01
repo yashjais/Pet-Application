@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.1",
+    "react-select": "^3.0.8",
     "validator": "^12.2.0"
   }
 }

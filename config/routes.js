@@ -22,7 +22,7 @@ router.get('/pets/:id',authenticateUser, authorizeUser.petOwner, petsController.
 router.put('/pets/:id',authenticateUser, authorizeUser.petOwner, petsController.update)
 router.delete('/pets/:id',authenticateUser, authorizeUser.petOwner, petsController.destroy)
 
-router.get('/profile-all', authenticateUser, authorizeUser.admin, profileController.listAll)
+router.get('/profile-all', authenticateUser, profileController.listAll)
 router.get('/profile', authenticateUser, profileController.list)
 router.post('/profile', authenticateUser, profileController.create)
 router.put('/profile/:id', authenticateUser, profileController.update)

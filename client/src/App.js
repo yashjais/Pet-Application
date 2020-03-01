@@ -47,7 +47,7 @@ function App(props) {
                     {/* some link authenticated of pets */}
                     <Link to='/profile'>Profile</Link>
                     <Link to='/users/account'>Account</Link>
-                    <Link to='/users/listing'>Listing</Link>
+                    <Link to='/listing'>Listing</Link>
                     {props.user.role == 'petowner' && <Link to="/pets">Pets</Link>}
                     <Link to='#' onClick={handleLogout}>Logout</Link>
                 </div> 

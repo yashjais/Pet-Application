@@ -6,6 +6,7 @@ import configureStore from './store/configureStore'
 import {Provider} from 'react-redux'
 import {startGetUserIndex} from './actions/user'
 import {startGetProfile} from './actions/profile'
+import {startGetAllProfile} from './actions/profile'
 
 const store = configureStore()
 
@@ -18,6 +19,7 @@ if(localStorage.getItem('authToken')){
     const token = localStorage.getItem('authToken')
     store.dispatch(startGetUserIndex(token))
     store.dispatch(startGetProfile(token))
+    store.dispatch(startGetAllProfile(token))
     // startGetProfile(token)
 }
 

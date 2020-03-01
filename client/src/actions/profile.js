@@ -4,6 +4,12 @@ export const setProfile = (profile) => {
     return {type: 'SET_PROFILE', payload: profile}
 }
 
+export const setProfiles = (profiles) => {
+    return {
+        type: 'SET_PROFILES', payload: profiles
+    }
+}
+
 export const startGetProfile = (token) => {
     return (dispatch) => {
         axios.get('/profile',{
@@ -38,6 +44,21 @@ export const startSetProfile = (profile, redirect, token) => {
             })
             .catch(err => {
                 alert(err)
+            })
+    }
+}
+
+export const startGetAllProfile = (token) => {
+    return (dispatch) => {
+        axios.get('profile-all', {
+            headers: {
+                'x-auth': token
+            }
+        })
+            .then(response => {
+                console.log(response.data)
+                const profiles = response.data
+                dispatch(setProfiles(profiles))
             })
     }
 }
