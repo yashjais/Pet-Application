@@ -17,6 +17,7 @@ import ListEdit from './components/profile/Edit'
 import Listing from './components/Listing/List'
 
 import Pets from './components/Pets/List'
+import AddPet from './components/Pets/Add'
 
 function App(props) {
     console.log(props, 'in the app')
@@ -66,7 +67,8 @@ function App(props) {
 
             <Route path='/listing' component={Listing} />
 
-            <Route path="/pets" component={Pets} />
+            <Route path="/pets" component={Pets} exact={true} />
+            <Route path="/pets/add" component={AddPet} />
             </BrowserRouter>
         </div>
     )
