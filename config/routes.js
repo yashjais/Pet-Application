@@ -6,6 +6,7 @@ const usersController = require('../app/controllers/usersController')
 const profileController = require('../app/controllers/profileController')
 const reviewController = require('../app/controllers/reviewController')
 const serviceController = require('../app/controllers/serviceController')
+const requestController = require('../app/controllers/requestController')
 const authenticateUser = require('../app/middlewares/authenticateUser')
 const authorizeUser = require('../app/middlewares/authorizeUser')
 
@@ -34,10 +35,16 @@ router.get('/reviews/:id', authenticateUser, reviewController.show)
 router.put('/reviews/:id', authenticateUser, reviewController.update)
 router.delete('/reviews/:id', authenticateUser, reviewController.destroy)
 
+router.get('/request', authenticateUser, authorizeUser.petOwner, requestController.list)
+router.post('/request', authenticateUser, authorizeUser.petOwner, requestController.create)
+router.get('/request/:id', authenticateUser, authorizeUser.petOwner, requestController.show)
+router.get('/request/:id', authenticateUser, requestController.update) // anybody can update it, let's say petsitter say yes or petowner wants to change the message body
+router.get('/request/:id', authenticateUser, authorizeUser.petOwner, requestController.delete)
+
 router.get('/services-all', authenticateUser, authorizeUser.admin, serviceController.list)
 router.get('/services', authenticateUser, authorizeUser.petSitter, serviceController.list)
 router.post('/services', authenticateUser, authorizeUser.admin, serviceController.create)
-router.put('/services/:id', authenticateUser, authorizeUser.admin, serviceController.update)
-router.delete('/services/:id', authenticateUser, authorizeUser.admin, serviceController.destroy)
+router.put('/services/:id', authenticateUser, authorizeUser.admin, serviceController.update) // updation is remaining
+router.delete('/services/:id', authenticateUser, authorizeUser.admin, serviceController.destroy) // updation is remaining
 
 module.exports = router

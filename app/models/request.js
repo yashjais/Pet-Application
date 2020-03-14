@@ -1,22 +1,24 @@
 const mongoose = require('mongoose')
 
+const Schema = mongoose.Schema
+
 const requestSchema = new Schema({
-    user = {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    requester = {  // to which the request is going
+    receiver: {  // to which the request is going
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    services = {
+    services: {
         type: Schema.Types.ObjectId,
         ref: 'Services'
     },
-    message = {
+    message: {
         type: String
     },
-    status = {
+    status: {
         type: Boolean,
         default: false
     }
